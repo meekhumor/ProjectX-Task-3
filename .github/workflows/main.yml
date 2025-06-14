@@ -2,7 +2,7 @@ on:
   push:
   pull_request:
 
-job:
+jobs:
   checkRisk:
     runs-on: windows-latest
     steps:
