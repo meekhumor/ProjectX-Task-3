@@ -1,0 +1,8 @@
+on: [push,pull_requests,commit]
+
+job:
+  checkRisk:
+    steps:
+      -run: python analyze.py
+
+
