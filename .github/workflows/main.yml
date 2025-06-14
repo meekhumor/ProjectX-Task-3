@@ -1,4 +1,6 @@
-on: [push,pull_requests,commit]
+on: 
+  push:
+  pull_requests:
 
 job:
   runs-on: windows-latest
