@@ -3,8 +3,8 @@ on:
   pull_requests:
 
 job:
-  runs-on: windows-latest
   checkRisk:
+    runs-on: windows-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout.py
