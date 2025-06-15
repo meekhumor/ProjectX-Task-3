@@ -6,9 +6,6 @@ jobs:
   checkRisk:
     runs-on: windows-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
       - name: Set-up Python
         uses: actions/setup-python@v4
         with:
@@ -16,5 +13,5 @@ jobs:
 
       - name: Run Python Script
         run: python analyze.py
-
+  
 
