@@ -7,7 +7,7 @@ def remove_whitespaces_from_end(clone):
 
 def line_length_violation(clone):
     remove_whitespaces_from_end(clone)
-    if len(clone) < 80:
+    if len(clone) <= 80:
         return False
     return True
 
