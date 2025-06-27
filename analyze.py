@@ -6,8 +6,6 @@ def remove_whitespaces_from_end(clone):
     return clone[:len(clone)]
 
 def line_length_violation(clone):
-    if len(clone) < 80:
-        return False
     remove_whitespaces_from_end(clone)
     if len(clone) < 80:
         return False
