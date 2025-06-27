@@ -73,15 +73,16 @@ forbidden_keyword_used_list_filewise = []
 
 for root, dirs, files in os.walk(src_folder):
     for file in files:
-        no_of_violations_in_this_file = 0
-        forbidden_keyword_was_used_in_this_file = False
         if file.endswith('.py'):
-            with open(file, 'r') as f:
+            no_of_violations_in_this_file = 0
+            forbidden_keyword_was_used_in_this_file = False
+            file_path = os.path.join(root, file)
+            with open(file_path, 'r') as f:
                 for line in f:
                     no_of_violations_in_this_line, forbidden_keyword_was_used_in_this_line = check_violations(line)
                     no_of_violations_in_this_file += no_of_violations_in_this_line
                     forbidden_keyword_was_used_in_this_file = forbidden_keyword_was_used_in_this_file or forbidden_keyword_was_used_in_this_line
-            file_path_list.append(file)
+            file_path_list.append(file_path)
             no_of_violations_list_filewise.append(no_of_violations_in_this_file)
             forbidden_keyword_used_list_filewise.append(forbidden_keyword_was_used_in_this_file)
 
@@ -100,7 +101,7 @@ for i in range(len(file_path_list)):
     
     s = '|       ' + str(i + 1) + ' | ' + file_path_list[i]
     
-    for i in range(max_path_length - len(file_path_list[i])):
+    for _ in range(max_path_length - len(file_path_list[i])):
         s += " "
     s += " | "
     
