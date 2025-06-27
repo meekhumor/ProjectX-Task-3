@@ -3,7 +3,7 @@ name: analyze.py
 on:
   push:
     branches:
-      - main
+      - task3
 
 jobs:
   analysis:
