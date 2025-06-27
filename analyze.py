@@ -1,3 +1,5 @@
+import os
+
 def remove_whitespaces_from_end(clone):
     if clone[len(clone) - 1] == ' ' and len(clone) >= 80:
         return remove_whitespaces_from_end(clone[:len(clone) - 1])
@@ -64,26 +66,27 @@ def check_violations(line):
             forbidden_keyword_was_used_in_this_line = True
     return no_of_violations_for_this_line, forbidden_keyword_was_used_in_this_line
 
-no_of_files = int(input("enter the total number of files to be analyzed: "))
+src_folder = 'src'
 file_path_list = []
 no_of_violations_list_filewise = []
 forbidden_keyword_used_list_filewise = []
 
-for _ in range(no_of_files):
-    no_of_violations_in_this_file = 0
-    forbidden_keyword_was_used_in_this_file = False
-    file_path = input("enter file path: ")
-    with open(file_path, 'r') as f:
-        for line in f:
-            no_of_violations_in_this_line, forbidden_keyword_was_used_in_this_line = check_violations(line)
-            no_of_violations_in_this_file += no_of_violations_in_this_line
-            forbidden_keyword_was_used_in_this_file = forbidden_keyword_was_used_in_this_file or forbidden_keyword_was_used_in_this_line
-    file_path_list.append(file_path)
-    no_of_violations_list_filewise.append(no_of_violations_in_this_file)
-    forbidden_keyword_used_list_filewise.append(forbidden_keyword_was_used_in_this_file)
+for root, dirs, files in os.walk(src_folder):
+    for file in files:
+        no_of_violations_in_this_file = 0
+        forbidden_keyword_was_used_in_this_file = False
+        if file.endswith('.py'):
+            with open(file, 'r') as f:
+                for line in f:
+                    no_of_violations_in_this_line, forbidden_keyword_was_used_in_this_line = check_violations(line)
+                    no_of_violations_in_this_file += no_of_violations_in_this_line
+                    forbidden_keyword_was_used_in_this_file = forbidden_keyword_was_used_in_this_file or forbidden_keyword_was_used_in_this_line
+            file_path_list.append(file)
+            no_of_violations_list_filewise.append(no_of_violations_in_this_file)
+            forbidden_keyword_used_list_filewise.append(forbidden_keyword_was_used_in_this_file)
 
 max_path_length = 9
-for i in range(no_of_files):
+for i in range(len(file_path_list)):
     if len(file_path_list[i]) > max_path_length:
         max_path_length = len(file_path_list[i])
 
@@ -93,7 +96,7 @@ for _ in range(9, max_path_length):
 s += '| Status    | No of violations |'
 print(s)
 
-for i in range(no_of_files):
+for i in range(len(file_path_list)):
     
     s = '|       ' + str(i + 1) + ' | ' + file_path_list[i]
     
