@@ -11,5 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: analyze
-        run: echo "analyzing"
+        run: python analyze.py
         shell: bash
