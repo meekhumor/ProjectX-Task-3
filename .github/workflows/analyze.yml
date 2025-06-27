@@ -1,0 +1,15 @@
+name: analyze.py
+
+on:
+  push:
+    branches:
+      - task3
+
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: analyze
+        run: python analyze.py
+        shell: bash
